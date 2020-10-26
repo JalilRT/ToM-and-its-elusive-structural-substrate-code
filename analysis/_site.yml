@@ -1,7 +1,7 @@
-name: "ToM-and-its-elusive-structural-substrate-code"
+name: ToM-and-its-elusive-structural-substrate-code
 output_dir: ../docs
 navbar:
-  title: "ToM-and-its-elusive-structural-substrate-code"
+  title: ToM-and-its-elusive-structural-substrate-code
   left:
   - text: Home
     href: index.html
@@ -9,6 +9,10 @@ navbar:
     href: about.html
   - text: License
     href: license.html
+  right:
+  - icon: fa-github
+    text: Source code
+    href: https://github.com/JalilRT/ToM-and-its-elusive-structural-substrate-code
 output:
   workflowr::wflow_html:
     toc: yes
