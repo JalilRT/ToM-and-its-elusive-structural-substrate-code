@@ -8,4 +8,20 @@ editor_options:
   chunk_output_type: console
 ---
 
-Welcome to my research website.
+Datasets and code for the preprint: [Theory of Mind and its elusive structural substrate](10.31219/osf.io/5pf2h).
+
+Please let us know if something in the code is incomplete or files are missing or you have any problems.
+
+## About
+
+The present study is the result of the analysis from Pragmatic language database project. In here, we explored the cortical thickness and volume from a Mexican population sample and its relation with theory of mind metrics.
+
+# Authors
+
+Lizcano-Cortés Fernando, Rasgado-Toledo Jalil, Giudicessi Averi and Giordano Magda
+
+## Data
+
+BIDS compliant raw MRI data will be available soon in openNeuro
+For check the workflow go to above tab. 
+csv files and supplementaries are available in source github of this page master: data/

@@ -1,0 +1,167 @@
+---
+title: "Workflow"
+author: "Jalil Rasgado; Fernando Lizcano"
+date: "2020-10-18"
+output: workflowr::wflow_html
+editor_options:
+  chunk_output_type: console
+---
+
+## Preprocessing
+
+# fMRIprep
+
+1. After BIDS arrangement, we download singularity image (.sif) from Poldracklab docker.
+
+2. We run the following script in an HCP computers.
+
+```{bash, eval=FALSE, engine="sh"}
+#!/bin/bash
+
+module unload singularity/2.2
+module load singularityce/3.5.3
+
+export FS_LICENSE=/mnt/MD1200B/egarza/jrasgado/license.txt
+export SINGULARITYENV_FS_LICENSE=/mnt/MD1200B/egarza/jrasgado/license.txt
+container=/mnt/MD1200B/egarza/egarza/singularity_images/poldracklab_fmriprep-2020-01-14-933ad4693a12.img
+
+export FSLDIR=/mnt/MD1200A/lconcha/lconcha/fsl_5.0.6
+export PATH=${FSLDIR}/bin:${PATH}
+. ${FSLDIR}/etc/fslconf/fsl.sh
+export FSLPARALLEL=1
+export LD_LIBRARY_PATH=${FSLDIR}/lib:${LD_LIBRARY_PATH}
+
+##Top level directory
+UP_LEVEL=/mnt/MD1200B/egarza/jrasgado/Pragmatic_studies/Pragmatic_language
+subjid=`ls -d /mnt/MD1200B/egarza/jrasgado/Pragmatic_studies/Pragmatic_language/01*/sub-*`
+
+for s in $subjid
+do
+  this_subject=`basename $s`
+  this_subject=${this_subject/sub-/}
+  echo "submitting job for subject $this_subject"
+  fsl_sub -M jalil.rasgadoto@gmail.com -m ea -s openmp,8 -R 10 -N ct_${this_subject}_fsl \
+  singularity run -B /mnt:/mnt $container \
+  ${UP_LEVEL}/01* \
+  ${UP_LEVEL}/derivatives/fmriprep/output_fsr \
+  participant \
+  --participant_label $this_subject \
+  --skip_bids_validation \
+  --ignore fieldmaps \
+  --output-spaces T1w MNI152NLin2009cAsym fsaverage5\
+  --work-dir ${UP_LEVEL}/tmp/fmriprep/output_fsr/ \
+  --fs-license-file $FS_LICENSE \
+  --fs-no-reconall \
+  --resource-monitor \
+  --write-graph 
+echo ""
+
+done
+```
+
+## Volume 
+
+# FSL
+
+# CAT12-VBM
+
+## Cortical thickness
+
+# FreeSurfer
+
+1. Enable --recon-all in fmriprep pipeline
+2. Run qcache pipeline
+
+```{bash, eval=FALSE, engine="sh"}
+#!/bin/bash
+
+export SUBJECTS_DIR=/misc/giora/lizcano7/paper/fmriprep_grosor/
+subj='ls /misc/giora/lizcano7/paper/fmriprep_grosor/sub-*'
+
+for i in ${subj}; do
+sub=`basename ${i}`
+echo ${sub}
+recon-all -s ${sub} -qcache
+
+done
+```
+
+3. You can run Surface Run Analysis using Qdec tool: https://surfer.nmr.mgh.harvard.edu/fswiki/FsTutorial/QdecGroupAnalysis_freeview
+4. Extract cortical thickness based on Desikan-Killiany Atlas ('aparc') and/or Destrieux Atlas ('aparc.a2009s')
+
+```{bash, eval=FALSE, engine="sh"}
+parc='aparc'
+measure='thickness'
+cd /misc/giora/lizcano7/paper/fmriprep_grosor/
+export SUBJECTS_DIR=/misc/giora/lizcano7/paper/fmriprep_grosor/
+subjects=$(ls -d sub*/)
+echo "$subjects"
+for h in 'lh rh'; do
+aparcstats2table --subjects ${subjects} --hemi ${h} --meas ${measure} -p ${parc} --skip fsaverage --delimiter=comma --tablefile ${parc}_${h}_thickness.csv
+done
+
+asegstats2table --subjects ${subjects} --skip --meas volume --common-segs --segno 10 11 12 13 17 18 26 49 50 51 52 53 54 58 --delimiter comma --tablefile asegstats.csv
+
+```
+
+
+# CAT12-SBM
+
+## ROI analysis
+
+# mask
+
+```{bash, eval=FALSE, engine="sh"}
+#!/bin/bash
+
+###Obtener ROIs apartir de coordenadas
+
+
+##Escribir direcciones de guardado y lectura
+#Nombre de dónde se tomó las coordenadas
+Nombre=rois/Neurosynth
+
+#dirección de guardado
+mkdir -p /misc/giora/lizcano7/paper/vbm/${Nombre}
+estructuras=`ls -d /misc/giora/lizcano7/paper/vbm/${Nombre}`
+mkdir -p ${estructuras}/Mask
+mkdir -p ${estructuras}/inflated
+mkdir -p ${estructuras}/bin
+
+#Coordenadas
+
+x=(47 18 70 44 70 20)
+y=(87 30 66 36 35 65)
+z=(27 57 20 56 46 20)
+NEstructura=(mPfC lOC TPole Precuneus Angular MTG)
+
+echo "Iniciando script"
+## asignarle valores a i dependiendo de la cantidad de ROIs a obtener, comenzando de 0, es decir, si son 3, colocar 0,1,2; si son 5: 0,1,2,3,4
+for i in {0..5}; do ## colocar el número de rois empezando de 0
+  for Coordx in ${x[i]}; do
+    echo "${Coordx}"
+  for Coordy in ${y[i]}; do
+    echo "${Coordy}"
+  for Coordz in ${z[i]}; do
+    echo "${Coordz}"
+    for estruc in ${NEstructura[i]}; do
+      echo "generando datos para ${estruc}"
+    #coordenadas:
+      echo "Máscara"
+    fslmaths /home/inb/lconcha/fmrilab_software/fsl_5.0.6/data/standard/avg152T1.nii.gz -mul 0 \
+    -add 1 -roi ${Coordx} 1 ${Coordy} 1 ${Coordz} 1 0 1 ${estructuras}/Mask/${estruc} -odt float
+
+    #inflated
+      echo "inflado"
+    fslmaths ${estructuras}/Mask/${estruc}.nii.gz -kernel sphere 10 -fmean ${estructuras}/inflated/${estruc}.nii.gz -odt float
+
+    #binario:
+      echo "binarización"
+    fslmaths ${estructuras}/inflated/${estruc}.nii.gz -bin ${estructuras}/bin/bin_inflated_${estruc}_mask.nii.gz
+done
+done
+done
+done
+done
+```
+

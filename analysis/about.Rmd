@@ -1,5 +1,5 @@
 ---
-title: "About"
+title: "Abstract"
 output:
   workflowr::wflow_html:
     toc: false
@@ -7,4 +7,4 @@ editor_options:
   chunk_output_type: console
 ---
 
-Describe your project.
+Is brain structure related to function? Can one predict the other? This is a question that is still waiting to be answered definitively. ToM is defined as the ability to attribute mental states to others. Previous studies have observed correlations between performance on ToM tasks, and gray matter size/volume in dorsomedial prefrontal cortex (dmPFC), temporoparietal junction (TPJ) and precuneus (PCu). Despite these findings, there are concerns about false positive results and replicability issues. In this study, we used two different tasks to evaluate ToM, Reading the Mind in the Eyes Test (RMET), and the Short Story Task (SST). The performance in these tasks was correlated to brain anatomy measures, including voxel-based morphometry (VBM) and cortical thickness (CT) analysis, from ninety-one neurotypical participants.  High-resolution structural brain images were acquired, and whole-brain and region of interest (ROI) analyses were implemented. The analyses did not show statistically significant associations between ToM performance and structural measures after correction. Significant associations between performance on ToM tests and a widespread array of regions loosely associated with ToM were observed only for whole brain uncorrected analysis analysis (p < 0.001). These results do not replicate a previous study with neurotypical participants (Sato et al., 2016). We tested two different ToM tests, two different softwares for VBM and CT, and we used two sub-samples, one with 91 and the other with 69 participants. Neither of these conditions made a difference in the results obtained.  Consequently, these results suggest that if the population is neurotypical and homogenous, it is unlikely that a reliable association between brain anatomy measures and ToM performance may be found. 
