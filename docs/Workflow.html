@@ -18,7 +18,7 @@
 <script src="site_libs/header-attrs-2.5/header-attrs.js"></script>
 <script src="site_libs/jquery-1.11.3/jquery.min.js"></script>
 <meta name="viewport" content="width=device-width, initial-scale=1" />
-<link href="site_libs/bootstrap-3.3.5/css/cosmo.min.css" rel="stylesheet" />
+<link href="site_libs/bootstrap-3.3.5/css/journal.min.css" rel="stylesheet" />
 <script src="site_libs/bootstrap-3.3.5/js/bootstrap.min.js"></script>
 <script src="site_libs/bootstrap-3.3.5/shim/html5shiv.min.js"></script>
 <script src="site_libs/bootstrap-3.3.5/shim/respond.min.js"></script>
@@ -377,7 +377,7 @@ div.tocify {
   <a href="index.html">Home</a>
 </li>
 <li>
-  <a href="about.html">About</a>
+  <a href="about.html">Abstract</a>
 </li>
 <li>
   <a href="Workflow.html">Workflow</a>
@@ -430,7 +430,7 @@ div.tocify {
 <div class="tab-content">
 <div id="summary" class="tab-pane fade in active">
 <p>
-<strong>Last updated:</strong> 2020-10-26
+<strong>Last updated:</strong> 2020-10-29
 </p>
 <p>
 <strong>Checks:</strong> <span class="glyphicon glyphicon-ok text-success" aria-hidden="true"></span> 7 <span class="glyphicon glyphicon-exclamation-sign text-danger" aria-hidden="true"></span> 0
@@ -521,16 +521,16 @@ This reproducible <a href="http://rmarkdown.rstudio.com">R Markdown</a> analysis
 <div class="panel panel-default">
 <div class="panel-heading">
 <p class="panel-title">
-<a data-toggle="collapse" data-parent="#workflowr-checks" href="#strongRepositoryversionstrongahrefhttpsgithubcomJalilRTToManditselusivestructuralsubstratecodetree285dc525c566f95f71de9dbcdaee23b5ed18de49targetblank285dc52a"> <span class="glyphicon glyphicon-ok text-success" aria-hidden="true"></span> <strong>Repository version:</strong> <a href="https://github.com/JalilRT/ToM-and-its-elusive-structural-substrate-code/tree/285dc525c566f95f71de9dbcdaee23b5ed18de49" target="_blank">285dc52</a> </a>
+<a data-toggle="collapse" data-parent="#workflowr-checks" href="#strongRepositoryversionstrongahrefhttpsgithubcomJalilRTToManditselusivestructuralsubstratecodetreeb9c6de5c992a9f745ae705178ce4a07e59fb926atargetblankb9c6de5a"> <span class="glyphicon glyphicon-ok text-success" aria-hidden="true"></span> <strong>Repository version:</strong> <a href="https://github.com/JalilRT/ToM-and-its-elusive-structural-substrate-code/tree/b9c6de5c992a9f745ae705178ce4a07e59fb926a" target="_blank">b9c6de5</a> </a>
 </p>
 </div>
-<div id="strongRepositoryversionstrongahrefhttpsgithubcomJalilRTToManditselusivestructuralsubstratecodetree285dc525c566f95f71de9dbcdaee23b5ed18de49targetblank285dc52a" class="panel-collapse collapse">
+<div id="strongRepositoryversionstrongahrefhttpsgithubcomJalilRTToManditselusivestructuralsubstratecodetreeb9c6de5c992a9f745ae705178ce4a07e59fb926atargetblankb9c6de5a" class="panel-collapse collapse">
 <div class="panel-body">
 <p>
 Great! You are using Git for version control. Tracking code development and connecting the code version to the results is critical for reproducibility.
 </p>
 <p>
-The results in this page were generated with repository version <a href="https://github.com/JalilRT/ToM-and-its-elusive-structural-substrate-code/tree/285dc525c566f95f71de9dbcdaee23b5ed18de49" target="_blank">285dc52</a>. See the <em>Past versions</em> tab to see a history of the changes made to the R Markdown and HTML files.
+The results in this page were generated with repository version <a href="https://github.com/JalilRT/ToM-and-its-elusive-structural-substrate-code/tree/b9c6de5c992a9f745ae705178ce4a07e59fb926a" target="_blank">b9c6de5</a>. See the <em>Past versions</em> tab to see a history of the changes made to the R Markdown and HTML files.
 </p>
 <p>
 Note that you need to be careful to ensure that all relevant files for the analysis have been committed to Git prior to generating the results (you can use <code>wflow_publish</code> or <code>wflow_git_commit</code>). workflowr only checks the R Markdown file, but you know if there are other scripts or data files that it depends on. Below is the status of the Git repository when the results were generated:
@@ -538,6 +538,28 @@ Note that you need to be careful to ensure that all relevant files for the analy
 <pre><code>
 Ignored files:
     Ignored:    .Rhistory
+    Ignored:    analysis/.Rhistory
+
+Untracked files:
+    Untracked:  code/ct_prepro.m
+    Untracked:  code/ct_prepro.mat
+    Untracked:  code/ct_prepro_job.m
+    Untracked:  code/vbm_prepro.m
+    Untracked:  code/vbm_prepro.mat
+    Untracked:  code/vbm_prepro_job.m
+    Untracked:  data/ROIs_catROIs_aparc_a2009s_thickness.csv
+    Untracked:  data/ROIs_catROIs_aparc_a2009s_thickness_91.csv
+    Untracked:  data/SST.csv
+    Untracked:  data/SST_RMET.csv
+    Untracked:  data/design.png
+    Untracked:  data/fscat.csv
+    Untracked:  data/lh_ROIs_fsROIs_aparc_a2009s_thicknes.csv
+    Untracked:  data/lh_ROIs_fsROIs_aparc_a2009s_thicknes_69.csv
+    Untracked:  data/rh_ROIs_fsROIs_aparc_a2009s_thicknes.csv
+    Untracked:  data/rh_ROIs_fsROIs_aparc_a2009s_thicknes_69.csv
+    Untracked:  data/rois_ct.csv
+    Untracked:  data/rois_rmet.csv
+    Untracked:  data/rois_sst.csv
 
 Unstaged changes:
     Modified:   analysis/_site.yml
@@ -581,6 +603,40 @@ Message
 <tbody>
 <tr>
 <td>
+Rmd
+</td>
+<td>
+<a href="https://github.com/JalilRT/ToM-and-its-elusive-structural-substrate-code/blob/b9c6de5c992a9f745ae705178ce4a07e59fb926a/analysis/Workflow.Rmd" target="_blank">b9c6de5</a>
+</td>
+<td>
+JalilRT
+</td>
+<td>
+2020-10-29
+</td>
+<td>
+Publish the initial files for ToM-and-its-elusive-structural-substrate-code
+</td>
+</tr>
+<tr>
+<td>
+html
+</td>
+<td>
+<a href="https://rawcdn.githack.com/JalilRT/ToM-and-its-elusive-structural-substrate-code/9f522d4b093d6e2531fdefdf9467083a5b89ae92/docs/Workflow.html" target="_blank">9f522d4</a>
+</td>
+<td>
+JalilRT
+</td>
+<td>
+2020-10-26
+</td>
+<td>
+Build site.
+</td>
+</tr>
+<tr>
+<td>
 html
 </td>
 <td>
@@ -620,14 +676,13 @@ Publish the initial files for ToM-and-its-elusive-structural-substrate-code
 </div>
 </div>
 </div>
-<div id="preprocessing" class="section level2">
-<h2>Preprocessing</h2>
-</div>
-<div id="fmriprep" class="section level1">
-<h1>fMRIprep</h1>
+<div id="preprocessing" class="section level1">
+<h1>Preprocessing</h1>
+<div id="fmriprep" class="section level2">
+<h2>fMRIprep</h2>
 <ol style="list-style-type: decimal">
-<li><p>After BIDS arrangement, we download singularity image (.sif) from Poldracklab docker.</p></li>
-<li><p>We run the following script in an HCP computers.</p></li>
+<li><p>After BIDS arrangement, we download singularity image (.img) container from Poldracklab docker.</p></li>
+<li><p>We run the following script in High performance Computing (HPC) cluster.</p></li>
 </ol>
 <pre class="bash"><code>#!/bin/bash
 
@@ -653,7 +708,7 @@ do
   this_subject=`basename $s`
   this_subject=${this_subject/sub-/}
   echo &quot;submitting job for subject $this_subject&quot;
-  fsl_sub -M jalil.rasgadoto@gmail.com -m ea -s openmp,8 -R 10 -N ct_${this_subject}_fsl \
+  fsl_sub -s openmp,8 -R 10 -N ct_${this_subject}_fsl \
   singularity run -B /mnt:/mnt $container \
   ${UP_LEVEL}/01* \
   ${UP_LEVEL}/derivatives/fmriprep/output_fsr \
@@ -670,21 +725,68 @@ do
 echo &quot;&quot;
 
 done</code></pre>
-<div id="volume" class="section level2">
-<h2>Volume</h2>
 </div>
 </div>
-<div id="fsl" class="section level1">
-<h1>FSL</h1>
+<div id="volume" class="section level1">
+<h1>Volume</h1>
+<div id="fsl" class="section level2">
+<h2>FSL</h2>
+<p>After fMRIprep output, we select subject_“MNI152NLin2009cAsym_desc-preproc_T1w.nii.gz” files and use it in fslvbm pipeline: <a href="https://fsl.fmrib.ox.ac.uk/fsl/fslwiki/FSLVBM/UserGuide" class="uri">https://fsl.fmrib.ox.ac.uk/fsl/fslwiki/FSLVBM/UserGuide</a></p>
+<pre class="bash"><code>#!/bin/bash
+
+# create a template list:
+subjects=$(ls -d /misc/giora/lizcano7/vbm)
+
+for g in $subjects; do
+sub=%(basename $g);
+echo $g &gt;&gt; template_list
+done</code></pre>
+<p>We create a general linear model (glm) design with ToM scores as covariables</p>
+<div class="figure">
+<img src="../data/design.png" alt="" />
+<p class="caption">glm design</p>
 </div>
-<div id="cat12-vbm" class="section level1">
-<h1>CAT12-VBM</h1>
-<div id="cortical-thickness" class="section level2">
-<h2>Cortical thickness</h2>
+<p>We then run the fslvbm pipeline with design created</p>
+<pre class="bash"><code>
+slicesdir `imglob *` 
+
+fslvbm_1_bet -b -f 0
+
+fslvbm_2_template -a 
+
+fslvbm_3_proc 
+
+fslmaths GM_mod_merg -s 3.5 GM_mod_merg_s3.5 
+
+randomise -i GM_mod_merg_s3 -m GM_mask -o fslvbm -d design.mat -t design.con -T -n 5000 </code></pre>
+</div>
+<div id="cat12-vbm" class="section level2">
+<h2>CAT12-VBM</h2>
+<p>CAT12 as a extension of SPM software: <a href="https://www.fil.ion.ucl.ac.uk/spm/" class="uri">https://www.fil.ion.ucl.ac.uk/spm/</a>, is found in <a href="http://www.neuro.uni-jena.de/cat/" class="uri">http://www.neuro.uni-jena.de/cat/</a></p>
+<p>The present study follows the default pipeline provided in toolbox manual, using the GUI window to it.</p>
+<ol style="list-style-type: decimal">
+<li>Analysis design (.mat file) and job file for preprocessing are provided in ‘code/’ folder of this page.</li>
+</ol>
+<pre class="bash"><code>#% List of open inputs
+nrun = X; % enter the number of runs here
+jobfile = {&#39;~\vbm_prepro_job.m&#39;};
+jobs = repmat(jobfile, 1, nrun);
+inputs = cell(0, nrun);
+for crun = 1:nrun
+end
+spm(&#39;defaults&#39;, &#39;PET&#39;);
+spm_jobman(&#39;run&#39;, jobs, inputs{:});</code></pre>
+<ol start="2" style="list-style-type: decimal">
+<li>Analysis</li>
+</ol>
+<p>Contrast and average were specified as in fslvbm follow up CAT12 manual: <a href="http://www.neuro.uni-jena.de/cat12/CAT12-Manual.pdf" class="uri">http://www.neuro.uni-jena.de/cat12/CAT12-Manual.pdf</a></p>
+<p>We use as mask the whole brain and ROIs created.</p>
 </div>
 </div>
-<div id="freesurfer" class="section level1">
-<h1>FreeSurfer</h1>
+<div id="cortical-thickness" class="section level1">
+<h1>Cortical thickness</h1>
+<div id="freesurfer" class="section level2">
+<h2>FreeSurfer</h2>
 <ol style="list-style-type: decimal">
 <li>Enable –recon-all in fmriprep pipeline</li>
 <li>Run qcache pipeline</li>
@@ -701,8 +803,8 @@ recon-all -s ${sub} -qcache
 
 done</code></pre>
 <ol start="3" style="list-style-type: decimal">
-<li>You can run Surface Run Analysis using Qdec tool: <a href="https://surfer.nmr.mgh.harvard.edu/fswiki/FsTutorial/QdecGroupAnalysis_freeview" class="uri">https://surfer.nmr.mgh.harvard.edu/fswiki/FsTutorial/QdecGroupAnalysis_freeview</a></li>
-<li>Extract cortical thickness based on Desikan-Killiany Atlas (‘aparc’) and/or Destrieux Atlas (‘aparc.a2009s’)</li>
+<li><p>You can run Surface Run Analysis using Qdec tool: <a href="https://surfer.nmr.mgh.harvard.edu/fswiki/FsTutorial/QdecGroupAnalysis_freeview" class="uri">https://surfer.nmr.mgh.harvard.edu/fswiki/FsTutorial/QdecGroupAnalysis_freeview</a></p></li>
+<li><p>Extract cortical thickness based on Desikan-Killiany Atlas (‘aparc’) and/or Destrieux Atlas (‘aparc.a2009s’)</p></li>
 </ol>
 <pre class="bash"><code>parc=&#39;aparc&#39;
 measure=&#39;thickness&#39;
@@ -716,19 +818,50 @@ done
 
 asegstats2table --subjects ${subjects} --skip --meas volume --common-segs --segno 10 11 12 13 17 18 26 49 50 51 52 53 54 58 --delimiter comma --tablefile asegstats.csv
 </code></pre>
+<ol start="5" style="list-style-type: decimal">
+<li>Visual segmentation correction are need to obtain better CT results. (Replace subject 01 by the subject of interest)</li>
+</ol>
+<pre class="bash"><code>export SUBJECTS_DIR=fmriprep_ct/
+
+freeview -v fmriprep_ct/sub-01/mri/T1.mgz fmriprep_ct/sub-01/mri/brainmask.mgz -f fmriprep_ct/sub-01/surf/lh.white:edgecolor=yellow fmriprep_ct/sub-01/surf/lh.pial:edgecolor=green fmriprep_ct/sub-01/surf/rh.white:edgecolor=yellow fmriprep_ct/sub-01/surf/rh.pial:edgecolor=green
+
+recon-all -autorecon-pial -subjid sub-01</code></pre>
+<pre class="bash"><code>export SUBJECTS_DIR=fmriprep_ct/
+
+freeview -v fmriprep_grosor/sub-01/mri/brainmask.mgz \ fmriprep_grosor/sub-01/mri/wm.mgz:colormap=heat:opacity=0.4 \ -f fmriprep_grosor/sub-01/surf/lh.white:edgecolor=blue \ fmriprep_grosor/sub-01/surf/lh.pial:edgecolor=green \ fmriprep_grosor/sub-01/surf/rh.white:edgecolor=blue \ fmriprep_grosor/sub-01/surf/rh.pial:edgecolor=green \ 
+fmriprep_grosor/sub-01/surf/rh.inflated:visible=0 \ 
+fmriprep_grosor/sub-01/surf/lh.inflated:visible=0
+
+recon-all -autorecon2-wm -autorecon3 -subjid sub-01</code></pre>
 </div>
-<div id="cat12-sbm" class="section level1">
-<h1>CAT12-SBM</h1>
-<div id="roi-analysis" class="section level2">
-<h2>ROI analysis</h2>
+<div id="cat12-sbm" class="section level2">
+<h2>CAT12-SBM</h2>
+<ol style="list-style-type: decimal">
+<li><p>We applied the same preprocessing of CAT12VBM</p></li>
+<li><p>Preprocessing (provided in .mat file) for SBM are needed.</p></li>
+</ol>
+<pre class="bash"><code>% List of open inputs
+nrun = X; % enter the number of runs here
+jobfile = {&#39;~\ctprepro_job.m&#39;};
+jobs = repmat(jobfile, 1, nrun);
+inputs = cell(0, nrun);
+for crun = 1:nrun
+end
+spm(&#39;defaults&#39;, &#39;PET&#39;);
+spm_jobman(&#39;run&#39;, jobs, inputs{:});</code></pre>
+<ol start="3" style="list-style-type: decimal">
+<li><p>Steps for analysis are described in CAT12 manual</p></li>
+<li><p>ROIs analysis were made using mask created and by extracting values and correlated with ToM scores and other structures.</p></li>
+</ol>
 </div>
 </div>
-<div id="mask" class="section level1">
-<h1>mask</h1>
+<div id="roi-analysis" class="section level1">
+<h1>ROI analysis</h1>
+<div id="for-creating-mask" class="section level2">
+<h2>For creating mask</h2>
 <pre class="bash"><code>#!/bin/bash
 
-###Obtener ROIs apartir de coordenadas
-
+##Obtener ROIs apartir de coordenadas
 
 ##Escribir direcciones de guardado y lectura
 #Nombre de dónde se tomó las coordenadas
@@ -776,6 +909,294 @@ done
 done
 done
 done</code></pre>
+</div>
+<div id="correlation-cortical-thickness-91-subjects" class="section level2">
+<h2>Correlation Cortical thickness (91 subjects)</h2>
+<p>We extract cortical thickness values from each software with Destrieux Atlas (aparc a2009s) and correlated with ToM scores and other structures.</p>
+<pre class="r"><code>library(dplyr)
+library(ggplot2)
+library(tibble)
+library(ggthemr)
+library(corrplot)
+library(tidyverse)
+library(plyr)
+library(rstatix)
+##colors 
+col &lt;- colorRampPalette(c(&quot;#495c63&quot;, &quot;#65767b&quot;, &quot;#FFFFFF&quot;,&quot;#93c6d4&quot;,&quot;#3d6470&quot;))</code></pre>
+<pre class="r"><code>#### SST 91 ####
+# left
+rois_cat_91&lt;-read.csv(&quot;data/ROIs_catROIs_aparc_a2009s_thickness_91.csv&quot;)
+left_cat_91&lt;- select(as.tibble(rois_cat_91[3:ncol(rois_cat_91)]), starts_with(&#39;l&#39;))
+cat.lg_91&lt;-colMeans(left_cat_91)
+# right
+right_cat_91&lt;- select(as.tibble(rois_cat_91[4:ncol(rois_cat_91)]), starts_with(&#39;r&#39;))
+cat.rg_91&lt;-colMeans(right_cat_91)
+
+# For correlation plot
+join.cat.rl_91&lt;-data_frame(left_cat_91,right_cat_91)
+
+## FreeSurfer ##
+# left
+rois_fs_91&lt;-read.csv(&quot;data/lh_ROIs_fsROIs_aparc_a2009s_thicknes.csv&quot;)
+left_fs_91&lt;- select(as.tibble(rois_fs_91), starts_with(&#39;l&#39;))
+fs.lg_91&lt;-colMeans(left_fs_91[,-1])
+col.lr.fs&lt;-str_replace(colnames(left_fs_91),&quot;_thickness&quot;,&quot;&quot;)
+colnames(left_fs_91)&lt;-col.lr.fs
+col.lr.fs&lt;-str_replace(colnames(left_fs_91),&quot;h_&quot;,&quot;&quot;)
+colnames(left_fs_91)&lt;-col.lr.fs
+
+# right
+rois_fs_r_91&lt;-read.csv(&quot;data/rh_ROIs_fsROIs_aparc_a2009s_thicknes.csv&quot;)
+right_fs_91&lt;- select(as.tibble(rois_fs_r_91), starts_with(&#39;r&#39;))
+fs.rg_91&lt;-colMeans(right_fs_91[,-1])
+col.lr.fs&lt;-str_replace(colnames(right_fs_91),&quot;_thickness&quot;,&quot;&quot;)
+colnames(right_fs_91)&lt;-col.lr.fs
+col.lr.fs&lt;-str_replace(colnames(right_fs_91),&quot;h_&quot;,&quot;&quot;)
+colnames(right_fs_91)&lt;-col.lr.fs
+
+# For correlation plot
+join.fs.rl_91&lt;-data_frame(left_fs_91,right_fs_91)
+
+# Selecting ROIs
+
+rois.join.cat.91&lt;- join.cat.rl_91 %&gt;% select(&quot;lG_front_inf.Triangul&quot;,&quot;rG_front_inf.Triangul&quot;,&quot;lG_front_middle&quot;,&quot;rG_front_middle&quot;,&quot;lG_orbital&quot;,&quot;rG_orbital&quot;,&quot;lG_pariet_inf.Angular&quot;,&quot;rG_pariet_inf.Angular&quot;,&quot;lG_precuneus&quot;,&quot;rG_precuneus&quot;,&quot;lG_temporal_middle&quot;,&quot;rG_temporal_middle&quot;)
+rois.cat.91&lt;-rois.join.cat.91 %&gt;% mutate(IFG_CAT12=rowMeans(rois.join.cat.91[c(&quot;lG_front_inf.Triangul&quot;,&quot;rG_front_inf.Triangul&quot;)]),MFG_CAT12=rowMeans(rois.join.cat.91[c(&quot;lG_front_middle&quot;,&quot;rG_front_middle&quot;)]),OFG_CAT12=rowMeans(rois.join.cat.91[c(&quot;lG_orbital&quot;,&quot;rG_orbital&quot;)]),IPL_CAT12=rowMeans(rois.join.cat.91[c(&quot;lG_pariet_inf.Angular&quot;,&quot;rG_pariet_inf.Angular&quot;)]),Pcu_CAT12=rowMeans(rois.join.cat.91[c(&quot;lG_precuneus&quot;,&quot;rG_precuneus&quot;)]),MTG_CAT12=rowMeans(rois.join.cat.91[c(&quot;lG_temporal_middle&quot;,&quot;rG_temporal_middle&quot;)]))
+
+rois.join.fs.91&lt;- join.fs.rl_91 %&gt;% select(&quot;lG_front_inf.Triangul&quot;,&quot;rG_front_inf.Triangul&quot;,&quot;lG_front_middle&quot;,&quot;rG_front_middle&quot;,&quot;lG_orbital&quot;,&quot;rG_orbital&quot;,&quot;lG_pariet_inf.Angular&quot;,&quot;rG_pariet_inf.Angular&quot;,&quot;lG_precuneus&quot;,&quot;rG_precuneus&quot;,&quot;lG_temporal_middle&quot;,&quot;rG_temporal_middle&quot;)
+rois.fs.91&lt;-rois.join.fs.91 %&gt;% mutate(IFG_FS=rowMeans(rois.join.fs.91[c(&quot;lG_front_inf.Triangul&quot;,&quot;rG_front_inf.Triangul&quot;)]),MFG_FS=rowMeans(rois.join.fs.91[c(&quot;lG_front_middle&quot;,&quot;rG_front_middle&quot;)]),OFG_FS=rowMeans(rois.join.fs.91[c(&quot;lG_orbital&quot;,&quot;rG_orbital&quot;)]),IPL_FS=rowMeans(rois.join.fs.91[c(&quot;lG_pariet_inf.Angular&quot;,&quot;rG_pariet_inf.Angular&quot;)]),Pcu_FS=rowMeans(rois.join.fs.91[c(&quot;lG_precuneus&quot;,&quot;rG_precuneus&quot;)]),MTG_FS=rowMeans(rois.join.fs.91[c(&quot;lG_temporal_middle&quot;,&quot;rG_temporal_middle&quot;)]))
+
+rois.cat.fs.91&lt;-data_frame(rois.cat.91[-c(1:12)],rois.fs.91[-c(1:12)])
+row.names(rois.cat.fs.91)&lt;-rois_fs_91$lh.aparc.a2009s.thickness</code></pre>
+<p>From the resulting joint matrix of each cortical thickness subject, we select those regions who has shown relation with theory of mind. For this study we selected:</p>
+<ul>
+<li>IFG</li>
+<li>MFG</li>
+<li>OFG</li>
+<li>IPL</li>
+<li>Pcu</li>
+<li>MTG</li>
+</ul>
+<pre class="r"><code># columns means for both hemispheres 
+cat.rl_91&lt;-data.frame(cat.lg_91,cat.rg_91)
+cat_91&lt;-cat.rl_91 %&gt;% mutate(mean=rowMeans(cbind(cat.lg_91,cat.rg_91), na.rm=T))
+row.names(cat_91)&lt;-row.names(cat.rl_91)
+r.cat.sd&lt;-sapply(right_cat_91[,-1],sd,na.rm=TRUE)
+l.cat.sd&lt;-sapply(left_cat_91[,-1],sd,na.rm=TRUE)
+cat.sd&lt;-data.frame(l.cat.sd,r.cat.sd)
+cat.sd&lt;-cat.sd %&gt;% mutate(meansd=rowMeans(cbind(l.cat.sd,r.cat.sd), na.rm=T))
+cat_91&lt;-data.frame(cat.rl_91[,0],cat_91)
+
+fs.rl_91&lt;-data.frame(fs.lg_91,fs.rg_91)
+fs_91&lt;-fs.rl_91 %&gt;% mutate(mean=rowMeans(cbind(fs.lg_91,fs.rg_91), na.rm=T))
+fs_91&lt;-data.frame(fs.rl_91[,0],fs_91)
+row.names(fs_91)&lt;-row.names(fs.rl_91)
+
+r.fs.sd&lt;-sapply(right_fs_91[,-1],sd,na.rm=TRUE)
+l.fs.sd&lt;-sapply(left_fs_91[,-1],sd,na.rm=TRUE)
+fs.sd&lt;-data.frame(l.fs.sd,r.fs.sd)
+fs.sd&lt;-fs.sd %&gt;% mutate(meansd=rowMeans(cbind(l.fs.sd,r.fs.sd), na.rm=T))
+
+row.fs.91.lr&lt;-str_replace(row.names(fs_91),&quot;_thickness&quot;,&quot;&quot;)
+row.names(fs_91)&lt;-row.fs.91.lr
+row.fs.91.lr&lt;-str_replace(row.names(fs_91),&quot;h_&quot;,&quot;&quot;)
+row.names(fs_91)&lt;-row.fs.91.lr
+
+fs&lt;-data.frame(fs_91,fs.sd)
+cat&lt;-data.frame(na.omit(cat_91),cat.sd)
+
+fs.cat&lt;-merge(cat[3],fs[3],by=&quot;row.names&quot;)
+fs.cat.sd&lt;-merge(cat[6],fs[6],by=&quot;row.names&quot;)
+fs.cat.2.sd&lt;-data.frame(fs.cat,fs.cat.sd[-1])
+colnames(fs.cat)[2]&lt;-&quot;CAT12-SBM&quot;
+colnames(fs.cat)[3]&lt;-&quot;FreeSurfer&quot;
+colnames(fs.cat.2.sd)[2:5]&lt;-c(&quot;CAT12-SBM&quot;,&quot;FreeSurfer&quot;,&quot;CATsd&quot;,&quot;FSsd&quot;)
+
+ggthemr(&quot;fresh&quot;)
+
+CTT&lt;-fs.cat %&gt;% gather(&quot;Software&quot;,&quot;CT&quot;,2:3)
+
+levels(CTT$Software)[1]&lt;-&quot;CAT12-SBM&quot;
+levels(CTT$Software)[2]&lt;-&quot;FreeSurfer&quot;
+legend_ord &lt;- factor(CTT$Software, levels = rev(levels(CTT$Software)))
+mu &lt;- ddply(CTT, &quot;Software&quot;, summarise, grp.mean=mean(CT))
+CT_his&lt;-ggplot(CTT, aes(x=CT, fill=Software, color=Software)) +
+  geom_histogram(aes(y=..density..),position=&quot;identity&quot;, alpha=0.7)+geom_density(alpha=0.42)+
+  geom_vline(data=mu, aes(xintercept=grp.mean, color=Software),
+             linetype=&quot;dashed&quot;)+
+  theme(legend.position=&quot;top&quot;)+
+  labs(x=&quot;Cortical Thickness&quot;, y = &quot;Density&quot;)
+CT_his+
+  scale_fill_discrete(breaks=legend_ord)+
+  scale_color_discrete(breaks=legend_ord)</code></pre>
+<p><img src="figure/Workflow.Rmd/unnamed-chunk-14-1.png" width="672" style="display: block; margin: auto;" /></p>
+<pre class="r"><code>CTT %&gt;% wilcox_test(CT~Software, alternative = &quot;two.sided&quot;, mu = 0,
+            paired = FALSE)%&gt;%
+  adjust_pvalue(method = &quot;bonferroni&quot;)</code></pre>
+<pre><code># A tibble: 1 x 8
+  .y.   group1    group2        n1    n2 statistic          p      p.adj
+  &lt;chr&gt; &lt;chr&gt;     &lt;chr&gt;      &lt;int&gt; &lt;int&gt;     &lt;dbl&gt;      &lt;dbl&gt;      &lt;dbl&gt;
+1 CT    CAT12-SBM FreeSurfer    74    74      4001 0.00000129 0.00000129</code></pre>
+<pre class="r"><code>CTT %&gt;% wilcox_effsize(CT~Software, alternative = &quot;two.sided&quot;, mu = 0,
+                       paired = FALSE)</code></pre>
+<pre><code># A tibble: 1 x 7
+  .y.   group1    group2     effsize    n1    n2 magnitude
+* &lt;chr&gt; &lt;chr&gt;     &lt;chr&gt;        &lt;dbl&gt; &lt;int&gt; &lt;int&gt; &lt;ord&gt;    
+1 CT    CAT12-SBM FreeSurfer   0.398    74    74 moderate </code></pre>
+<pre class="r"><code>CTT %&gt;% cohens_d(CT~Software, var.equal = FALSE)</code></pre>
+<pre><code># A tibble: 1 x 7
+  .y.   group1    group2     effsize    n1    n2 magnitude
+* &lt;chr&gt; &lt;chr&gt;     &lt;chr&gt;        &lt;dbl&gt; &lt;int&gt; &lt;int&gt; &lt;ord&gt;    
+1 CT    CAT12-SBM FreeSurfer   0.821    74    74 large    </code></pre>
+<pre class="r"><code>## bar plot
+CTT.sd&lt;-fs.cat.2.sd[c(1,4:5)] %&gt;% gather(&quot;Software&quot;,&quot;sd&quot;,2:3)
+#CT&lt;-data.frame(CTT,CTT.sd[3])
+
+## write and rename CT file
+CT&lt;-read_csv(&quot;data/fscat.csv&quot;)
+levels(CT$Software)[1]&lt;-&quot;CAT12-SBM&quot;
+levels(CT$Software)[2]&lt;-&quot;FreeSurfer&quot;
+legend_ord &lt;- factor(CT$Software, levels = rev(levels(CT$Software)))
+
+CT_bars&lt;-ggplot(CT, aes(x=names, y=CT, fill=legend_ord,color=legend_ord))+
+  geom_bar(stat=&quot;identity&quot;, position=position_dodge())+ 
+  theme(axis.text.x = element_text(angle = 90, hjust = 1),
+        legend.position = &quot;top&quot;)+
+  labs(x=&quot;Structures&quot;,y=&quot;Cortical Thickness (mm)&quot;)+
+  scale_color_manual(values=c(&quot;black&quot;, &quot;black&quot;),name=&quot;Software&quot;)+
+  scale_fill_manual(values=c(&quot;#233b43&quot;,&quot;#65adc2&quot;),name=&quot;Software&quot;)
+CT_bars+
+  geom_errorbar(aes(ymin=CT-sd, ymax=CT+sd),
+                width=.15,                    # Width of the error bars
+                position=position_dodge(.9))</code></pre>
+<p><img src="figure/Workflow.Rmd/unnamed-chunk-14-2.png" width="672" style="display: block; margin: auto;" /></p>
+<pre class="r"><code>sst_val&lt;-read_csv(&quot;data/SST.csv&quot;)
+rois.cat.fs.91&lt;-data_frame(sst_val,rois.cat.fs.91)
+roi.m.ct_91&lt;-cor(rois.cat.fs.91)
+p.mat&lt;-cor.mtest(roi.m.ct_91)
+corrplot(roi.m.ct_91, method=&quot;color&quot;, col=col(200),  
+         type=&quot;upper&quot;, tl.col=&quot;black&quot;, tl.srt=45, 
+         p.mat = p.mat$p, sig.level = 0.001, insig = &quot;blank&quot;, diag=FALSE,
+         addgrid.col = &quot;gray&quot;)</code></pre>
+<p><img src="figure/Workflow.Rmd/unnamed-chunk-15-1.png" width="672" style="display: block; margin: auto;" /></p>
+</div>
+<div id="correlation-cortical-thickness-69-subjects" class="section level2">
+<h2>Correlation Cortical thickness (69 subjects)</h2>
+<pre class="r"><code>##ROIS SST-RMET - 69 ###
+
+## CAT12 ##
+# left
+rois_cat&lt;-read.csv(&quot;data/ROIs_catROIs_aparc_a2009s_thickness.csv&quot;)
+left_cat&lt;- select(as.tibble(rois_cat[3:ncol(rois_cat)]), starts_with(&#39;l&#39;))
+cat.lg&lt;-colMeans(left_cat)
+# right
+right_cat&lt;- select(as.tibble(rois_cat[4:ncol(rois_cat)]), starts_with(&#39;r&#39;))
+cat.rg&lt;-colMeans(right_cat)
+
+# For correlation plot
+join.cat.rl&lt;-data_frame(left_cat,right_cat)
+
+# Both hemispheres
+cat.rl&lt;-data.frame(cat.lg,cat.rg)
+cat&lt;-cat.rl %&gt;% mutate(mean=rowMeans(cbind(cat.lg,cat.rg), na.rm=T))
+cat&lt;-data.frame(cat.rl[,0],cat)
+
+r.cat.sd&lt;-sapply(right_cat,sd,na.rm=TRUE)
+l.cat.sd&lt;-sapply(left_cat,sd,na.rm=TRUE)
+cat.sd&lt;-data.frame(l.cat.sd,r.cat.sd)
+cat.sd&lt;-cat.sd %&gt;% mutate(mean=rowMeans(cbind(l.cat.sd,r.cat.sd), na.rm=T))
+cat&lt;-data.frame(cat,cat.sd)
+
+## FreeSurfer ##
+# left
+rois_fs&lt;-read.csv(&quot;data/lh_ROIs_fsROIs_aparc_a2009s_thicknes_69.csv&quot;)
+left_fs&lt;- select(as.tibble(rois_fs), starts_with(&#39;l&#39;))
+fs.lg&lt;-colMeans(left_fs[,-1])
+# right
+rois_fs_r&lt;-read.csv(&quot;data/rh_ROIs_fsROIs_aparc_a2009s_thicknes_69.csv&quot;)
+right_fs&lt;- select(as.tibble(rois_fs_r), starts_with(&#39;r&#39;))
+fs.rg&lt;-colMeans(right_fs[,-1])
+
+col.lr.fs&lt;-str_replace(colnames(left_fs),&quot;_thickness&quot;,&quot;&quot;)
+colnames(left_fs)&lt;-col.lr.fs
+col.lr.fs&lt;-str_replace(colnames(left_fs),&quot;h_&quot;,&quot;&quot;)
+colnames(left_fs)&lt;-col.lr.fs
+
+col.lr.fs&lt;-str_replace(colnames(right_fs),&quot;_thickness&quot;,&quot;&quot;)
+colnames(right_fs)&lt;-col.lr.fs
+col.lr.fs&lt;-str_replace(colnames(right_fs),&quot;h_&quot;,&quot;&quot;)
+colnames(right_fs)&lt;-col.lr.fs
+
+# both hemispheres
+fs.rl&lt;-data.frame(fs.lg,fs.rg)
+fs&lt;-fs.rl %&gt;% mutate(mean=rowMeans(cbind(fs.lg,fs.rg), na.rm=T))
+fs&lt;-data.frame(fs.rl[,0],fs)
+
+r.fs.sd&lt;-sapply(right_fs[,-1],sd,na.rm=TRUE)
+l.fs.sd&lt;-sapply(left_fs[,-1],sd,na.rm=TRUE)
+fs.sd&lt;-data.frame(l.fs.sd,r.fs.sd)
+fs.sd&lt;-fs.sd %&gt;% mutate(mean=rowMeans(cbind(l.fs.sd,r.fs.sd), na.rm=T))
+fs&lt;-data.frame(fs,fs.sd)
+
+# For correlation plot
+join.fs.rl&lt;-data_frame(left_fs,right_fs)
+
+# Selecting ROIs
+rois.join.cat&lt;- join.cat.rl %&gt;% select(&quot;lG_front_inf.Triangul&quot;,&quot;rG_front_inf.Triangul&quot;,&quot;lG_front_middle&quot;,&quot;rG_front_middle&quot;,&quot;lG_orbital&quot;,&quot;rG_orbital&quot;,&quot;lG_pariet_inf.Angular&quot;,&quot;rG_pariet_inf.Angular&quot;,&quot;lG_precuneus&quot;,&quot;rG_precuneus&quot;,&quot;lG_temporal_middle&quot;,&quot;rG_temporal_middle&quot;)
+rois.cat&lt;-rois.join.cat %&gt;% mutate(IFG_CAT12=rowMeans(rois.join.cat[c(&quot;lG_front_inf.Triangul&quot;,&quot;rG_front_inf.Triangul&quot;)]),MFG_CAT12=rowMeans(rois.join.cat[c(&quot;lG_front_middle&quot;,&quot;rG_front_middle&quot;)]),OFG_CAT12=rowMeans(rois.join.cat[c(&quot;lG_orbital&quot;,&quot;rG_orbital&quot;)]),IPL_CAT12=rowMeans(rois.join.cat[c(&quot;lG_pariet_inf.Angular&quot;,&quot;rG_pariet_inf.Angular&quot;)]),Pcu_CAT12=rowMeans(rois.join.cat[c(&quot;lG_precuneus&quot;,&quot;rG_precuneus&quot;)]),MTG_CAT12=rowMeans(rois.join.cat[c(&quot;lG_temporal_middle&quot;,&quot;rG_temporal_middle&quot;)]))
+
+
+rois.join.fs&lt;- join.fs.rl %&gt;% select(&quot;lG_front_inf.Triangul&quot;,&quot;rG_front_inf.Triangul&quot;,&quot;lG_front_middle&quot;,&quot;rG_front_middle&quot;,&quot;lG_orbital&quot;,&quot;rG_orbital&quot;,&quot;lG_pariet_inf.Angular&quot;,&quot;rG_pariet_inf.Angular&quot;,&quot;lG_precuneus&quot;,&quot;rG_precuneus&quot;,&quot;lG_temporal_middle&quot;,&quot;rG_temporal_middle&quot;)
+rois.fs&lt;-rois.join.fs %&gt;% mutate(IFG_FS=rowMeans(rois.join.fs[c(&quot;lG_front_inf.Triangul&quot;,&quot;rG_front_inf.Triangul&quot;)]),MFG_FS=rowMeans(rois.join.fs[c(&quot;lG_front_middle&quot;,&quot;rG_front_middle&quot;)]),OFG_FS=rowMeans(rois.join.fs[c(&quot;lG_orbital&quot;,&quot;rG_orbital&quot;)]),IPL_FS=rowMeans(rois.join.fs[c(&quot;lG_pariet_inf.Angular&quot;,&quot;rG_pariet_inf.Angular&quot;)]),Pcu_FS=rowMeans(rois.join.fs[c(&quot;lG_precuneus&quot;,&quot;rG_precuneus&quot;)]),MTG_FS=rowMeans(rois.join.fs[c(&quot;lG_temporal_middle&quot;,&quot;rG_temporal_middle&quot;)]))
+
+rois.cat.fs&lt;-data_frame(rois.cat[-c(1:12)],rois.fs[-c(1:12)])
+row.names(rois.cat.fs)&lt;-rois_fs$lh.aparc.a2009s.thickness</code></pre>
+<pre class="r"><code>sst_rmet_val&lt;-read_csv(&quot;data/SST_RMET.csv&quot;)
+rois.cat.fs&lt;-data_frame(sst_rmet_val,rois.cat.fs)
+roi.m.ct&lt;-cor(rois.cat.fs)
+p.mat&lt;-cor.mtest(roi.m.ct)
+corrplot(roi.m.ct, method=&quot;color&quot;, col=col(200),  
+         type=&quot;upper&quot;, tl.col=&quot;black&quot;, tl.srt=45, 
+         p.mat = p.mat$p, sig.level = 0.001, insig = &quot;blank&quot;, diag=FALSE,
+         addgrid.col = &quot;gray&quot;)</code></pre>
+<p><img src="figure/Workflow.Rmd/unnamed-chunk-17-1.png" width="672" style="display: block; margin: auto;" /></p>
+</div>
+<div id="correlation-volume-91-subjects" class="section level2">
+<h2>Correlation Volume (91 subjects)</h2>
+<ol style="list-style-type: decimal">
+<li><p>Extract Volume from FSL using fslstats function</p></li>
+<li><p>Extract Volume from CAT12-VBM using marsbars toolbox: <a href="http://marsbar.sourceforge.net/" class="uri">http://marsbar.sourceforge.net/</a></p></li>
+</ol>
+<p>Correlation plot:</p>
+<pre class="r"><code>rois&lt;-read.csv(&quot;data/rois_sst.csv&quot;)
+
+rois.names.vol&lt;-c(&quot;SST&quot;,&quot;IPL/TPJ-L_CAT12&quot;,&quot;Pcu-L1_CAT12&quot;,&quot;dmPFC-L_CAT12&quot;,&quot;AnG-L_CAT12&quot;,&quot;LOC-R_CAT12&quot;,&quot;mFC-L_CAT12&quot;,&quot;MTG-R_CAT12&quot;,
+        &quot;Pcu-L2_CAT12&quot;,&quot;TL-L_CAT12&quot;,&quot;IPL/TPJ-L_FSL&quot;,&quot;Pcu-L1_FSL&quot;,&quot;dmPFC-L_FSL&quot;,&quot;AnG-L_FSL&quot;,&quot;LOC-R_FSL&quot;,
+        &quot;mFC-L_FSL&quot;,&quot;MTG-R_FSL&quot;,&quot;Pcu-L2_FSL&quot;,&quot;TL-L_FSL&quot;)
+roi.m&lt;-cor(rois)
+colnames(roi.m)&lt;-rois.names.vol
+rownames(roi.m)&lt;-rois.names.vol
+p.mat&lt;-cor.mtest(rois) 
+corrplot(roi.m, method=&quot;color&quot;, col=col(200),  
+         type=&quot;upper&quot;, tl.col=&quot;black&quot;, tl.srt=45, 
+         p.mat = p.mat$p, sig.level = 0.001, insig = &quot;blank&quot;, diag=FALSE,
+         addgrid.col = &quot;gray&quot;)</code></pre>
+<p><img src="figure/Workflow.Rmd/unnamed-chunk-18-1.png" width="672" style="display: block; margin: auto;" /></p>
+</div>
+<div id="correlation-volume-69-subjects" class="section level2">
+<h2>Correlation volume (69 subjects)</h2>
+<pre class="r"><code>rois_69&lt;-read.csv(&quot;data/rois_rmet.csv&quot;)
+rois.names.vol&lt;-c(&quot;RMET&quot;,&quot;SST&quot;,&quot;IPL/TPJ-L_CAT12&quot;,&quot;Pcu-L1_CAT12&quot;,&quot;dmPFC-L_CAT12&quot;,&quot;AnG-L_CAT12&quot;,&quot;LOC-R_CAT12&quot;,&quot;mFC-L_CAT12&quot;,&quot;MTG-R_CAT12&quot;,
+        &quot;Pcu-L2_CAT12&quot;,&quot;TL-L_CAT12&quot;,&quot;IPL/TPJ-L_FSL&quot;,&quot;Pcu-L1_FSL&quot;,&quot;dmPFC-L_FSL&quot;,&quot;AnG-L_FSL&quot;,&quot;LOC-R_FSL&quot;,
+        &quot;mFC-L_FSL&quot;,&quot;MTG-R_FSL&quot;,&quot;Pcu-L2_FSL&quot;,&quot;TL-L_FSL&quot;)
+roi.m.69&lt;-cor(rois_69)
+colnames(roi.m.69)&lt;-rois.names.vol
+rownames(roi.m.69)&lt;-rois.names.vol
+p.mat&lt;-cor.mtest(rois_69) 
+corrplot(roi.m.69, method=&quot;color&quot;, col=col(200),  
+         type=&quot;upper&quot;, tl.col=&quot;black&quot;, tl.srt=45, 
+         p.mat = p.mat$p, sig.level = 0.001, insig = &quot;blank&quot;, diag=FALSE,
+         addgrid.col = &quot;gray&quot;)</code></pre>
+<p><img src="figure/Workflow.Rmd/unnamed-chunk-19-1.png" width="672" style="display: block; margin: auto;" /></p>
 <br>
 <p>
 <button type="button" class="btn btn-default btn-workflowr btn-workflowr-sessioninfo" data-toggle="collapse" data-target="#workflowr-sessioninfo" style="display: block;">
@@ -804,17 +1225,35 @@ attached base packages:
 [1] stats     graphics  grDevices utils     datasets  methods   base     
 
 other attached packages:
-[1] workflowr_1.6.2
+ [1] rstatix_0.6.0   plyr_1.8.6      forcats_0.5.0   stringr_1.4.0  
+ [5] purrr_0.3.4     readr_1.4.0     tidyr_1.1.2     tidyverse_1.3.0
+ [9] corrplot_0.84   ggthemr_1.1.0   tibble_3.0.4    ggplot2_3.3.2  
+[13] dplyr_1.0.2     workflowr_1.6.2
 
 loaded via a namespace (and not attached):
- [1] Rcpp_1.0.5       rstudioapi_0.11  whisker_0.4      knitr_1.30      
- [5] magrittr_1.5     R6_2.4.1         rlang_0.4.8      stringr_1.4.0   
- [9] tools_3.6.3      xfun_0.18        git2r_0.27.1     htmltools_0.5.0 
-[13] ellipsis_0.3.1   rprojroot_1.3-2  yaml_2.2.1       digest_0.6.27   
-[17] tibble_3.0.4     lifecycle_0.2.0  crayon_1.3.4     later_1.1.0.1   
-[21] vctrs_0.3.4      promises_1.1.1   fs_1.5.0         glue_1.4.2      
-[25] evaluate_0.14    rmarkdown_2.5    stringi_1.5.3    compiler_3.6.3  
-[29] pillar_1.4.6     backports_1.1.10 httpuv_1.5.4     pkgconfig_2.0.3 </code></pre>
+ [1] matrixStats_0.57.0 fs_1.5.0           lubridate_1.7.9    httr_1.4.2        
+ [5] rprojroot_1.3-2    tools_3.6.3        backports_1.1.10   utf8_1.1.4        
+ [9] R6_2.4.1           DBI_1.1.0          colorspace_1.4-1   withr_2.3.0       
+[13] tidyselect_1.1.0   curl_4.3           compiler_3.6.3     git2r_0.27.1      
+[17] cli_2.1.0          rvest_0.3.6        xml2_1.3.2         sandwich_3.0-0    
+[21] labeling_0.4.2     scales_1.1.1       mvtnorm_1.1-1      digest_0.6.27     
+[25] foreign_0.8-75     rmarkdown_2.5      rio_0.5.16         pkgconfig_2.0.3   
+[29] htmltools_0.5.0    dbplyr_1.4.4       rlang_0.4.8        readxl_1.3.1      
+[33] rstudioapi_0.11    farver_2.0.3       generics_0.0.2     zoo_1.8-8         
+[37] jsonlite_1.7.1     zip_2.1.1          car_3.0-10         magrittr_1.5      
+[41] modeltools_0.2-23  Matrix_1.2-18      Rcpp_1.0.5         munsell_0.5.0     
+[45] fansi_0.4.1        abind_1.4-5        lifecycle_0.2.0    stringi_1.5.3     
+[49] multcomp_1.4-14    whisker_0.4        yaml_2.2.1         carData_3.0-4     
+[53] MASS_7.3-53        grid_3.6.3         blob_1.2.1         parallel_3.6.3    
+[57] promises_1.1.1     crayon_1.3.4       lattice_0.20-38    haven_2.3.1       
+[61] splines_3.6.3      hms_0.5.3          knitr_1.30         pillar_1.4.6      
+[65] codetools_0.2-16   stats4_3.6.3       reprex_0.3.0       glue_1.4.2        
+[69] evaluate_0.14      data.table_1.13.2  modelr_0.1.8       vctrs_0.3.4       
+[73] httpuv_1.5.4       cellranger_1.1.0   gtable_0.3.0       assertthat_0.2.1  
+[77] xfun_0.18          openxlsx_4.2.2     coin_1.3-1         libcoin_1.0-6     
+[81] broom_0.7.2        later_1.1.0.1      survival_3.1-8     TH.data_1.0-10    
+[85] ellipsis_0.3.1    </code></pre>
+</div>
 </div>
 </div>
 
