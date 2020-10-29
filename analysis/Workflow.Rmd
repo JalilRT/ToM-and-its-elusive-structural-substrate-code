@@ -7,13 +7,17 @@ editor_options:
   chunk_output_type: console
 ---
 
-## Preprocessing
+```{r, echo=FALSE}
+knitr::opts_chunk$set(error = TRUE)
+```
 
-# fMRIprep
+# Preprocessing
 
-1. After BIDS arrangement, we download singularity image (.sif) from Poldracklab docker.
+## fMRIprep
 
-2. We run the following script in an HCP computers.
+1. After BIDS arrangement, we download singularity image (.img) container from Poldracklab docker.
+
+2. We run the following script in High performance Computing (HPC) cluster.
 
 ```{bash, eval=FALSE, engine="sh"}
 #!/bin/bash
@@ -40,7 +44,7 @@ do
   this_subject=`basename $s`
   this_subject=${this_subject/sub-/}
   echo "submitting job for subject $this_subject"
-  fsl_sub -M jalil.rasgadoto@gmail.com -m ea -s openmp,8 -R 10 -N ct_${this_subject}_fsl \
+  fsl_sub -s openmp,8 -R 10 -N ct_${this_subject}_fsl \
   singularity run -B /mnt:/mnt $container \
   ${UP_LEVEL}/01* \
   ${UP_LEVEL}/derivatives/fmriprep/output_fsr \
@@ -59,15 +63,74 @@ echo ""
 done
 ```
 
-## Volume 
+# Volume 
 
-# FSL
+## FSL
 
-# CAT12-VBM
+After fMRIprep output, we select subject_"MNI152NLin2009cAsym_desc-preproc_T1w.nii.gz" files and use it in fslvbm pipeline: https://fsl.fmrib.ox.ac.uk/fsl/fslwiki/FSLVBM/UserGuide
 
-## Cortical thickness
+```{bash, eval=FALSE, engine="sh"}
+#!/bin/bash
 
-# FreeSurfer
+# create a template list:
+subjects=$(ls -d /misc/giora/lizcano7/vbm)
+
+for g in $subjects; do
+sub=%(basename $g);
+echo $g >> template_list
+done
+```
+
+We create a general linear model (glm) design with ToM scores as covariables
+
+![glm design](../data/design.png)
+
+We then run the fslvbm pipeline with design created
+
+```{bash, eval=FALSE, engine="sh"}
+
+slicesdir `imglob *` 
+
+fslvbm_1_bet -b -f 0
+
+fslvbm_2_template -a 
+
+fslvbm_3_proc 
+
+fslmaths GM_mod_merg -s 3.5 GM_mod_merg_s3.5 
+
+randomise -i GM_mod_merg_s3 -m GM_mask -o fslvbm -d design.mat -t design.con -T -n 5000 
+```
+
+## CAT12-VBM
+
+CAT12 as a extension of SPM software: https://www.fil.ion.ucl.ac.uk/spm/, is found in http://www.neuro.uni-jena.de/cat/
+
+The present study follows the default pipeline provided in toolbox manual, using the GUI window to it.
+
+1. Analysis design (.mat file) and job file for preprocessing are provided in 'code/' folder of this page.
+
+```{bash, eval=FALSE, engine="m"}
+#% List of open inputs
+nrun = X; % enter the number of runs here
+jobfile = {'~\vbm_prepro_job.m'};
+jobs = repmat(jobfile, 1, nrun);
+inputs = cell(0, nrun);
+for crun = 1:nrun
+end
+spm('defaults', 'PET');
+spm_jobman('run', jobs, inputs{:});
+```
+
+2. Analysis
+
+Contrast and average were specified as in fslvbm follow up CAT12 manual: http://www.neuro.uni-jena.de/cat12/CAT12-Manual.pdf
+
+We use as mask the whole brain and ROIs created.
+
+# Cortical thickness
+
+## FreeSurfer
 
 1. Enable --recon-all in fmriprep pipeline
 2. Run qcache pipeline
@@ -87,6 +150,7 @@ done
 ```
 
 3. You can run Surface Run Analysis using Qdec tool: https://surfer.nmr.mgh.harvard.edu/fswiki/FsTutorial/QdecGroupAnalysis_freeview
+
 4. Extract cortical thickness based on Desikan-Killiany Atlas ('aparc') and/or Destrieux Atlas ('aparc.a2009s')
 
 ```{bash, eval=FALSE, engine="sh"}
@@ -104,18 +168,57 @@ asegstats2table --subjects ${subjects} --skip --meas volume --common-segs --segn
 
 ```
 
+5. Visual segmentation correction are need to obtain better CT results. (Replace subject 01 by the subject of interest)
 
-# CAT12-SBM
+```{bash, eval=FALSE, engine="sh"}
+export SUBJECTS_DIR=fmriprep_ct/
 
-## ROI analysis
+freeview -v fmriprep_ct/sub-01/mri/T1.mgz fmriprep_ct/sub-01/mri/brainmask.mgz -f fmriprep_ct/sub-01/surf/lh.white:edgecolor=yellow fmriprep_ct/sub-01/surf/lh.pial:edgecolor=green fmriprep_ct/sub-01/surf/rh.white:edgecolor=yellow fmriprep_ct/sub-01/surf/rh.pial:edgecolor=green
 
-# mask
+recon-all -autorecon-pial -subjid sub-01
+```
+
+```{bash, eval=FALSE, engine="sh"}
+export SUBJECTS_DIR=fmriprep_ct/
+
+freeview -v fmriprep_grosor/sub-01/mri/brainmask.mgz \ fmriprep_grosor/sub-01/mri/wm.mgz:colormap=heat:opacity=0.4 \ -f fmriprep_grosor/sub-01/surf/lh.white:edgecolor=blue \ fmriprep_grosor/sub-01/surf/lh.pial:edgecolor=green \ fmriprep_grosor/sub-01/surf/rh.white:edgecolor=blue \ fmriprep_grosor/sub-01/surf/rh.pial:edgecolor=green \ 
+fmriprep_grosor/sub-01/surf/rh.inflated:visible=0 \ 
+fmriprep_grosor/sub-01/surf/lh.inflated:visible=0
+
+recon-all -autorecon2-wm -autorecon3 -subjid sub-01
+```
+
+
+## CAT12-SBM
+
+1. We applied the same preprocessing of CAT12VBM
+
+2. Preprocessing (provided in .mat file) for SBM are needed.
+
+```{bash, eval=FALSE, engine="m"}
+% List of open inputs
+nrun = X; % enter the number of runs here
+jobfile = {'~\ctprepro_job.m'};
+jobs = repmat(jobfile, 1, nrun);
+inputs = cell(0, nrun);
+for crun = 1:nrun
+end
+spm('defaults', 'PET');
+spm_jobman('run', jobs, inputs{:});
+```
+
+3. Steps for analysis are described in CAT12 manual
+
+4. ROIs analysis were made using mask created and by extracting values and correlated with ToM scores and other structures.
+
+# ROI analysis
+
+## For creating mask
 
 ```{bash, eval=FALSE, engine="sh"}
 #!/bin/bash
 
-###Obtener ROIs apartir de coordenadas
-
+##Obtener ROIs apartir de coordenadas
 
 ##Escribir direcciones de guardado y lectura
 #Nombre de dónde se tomó las coordenadas
@@ -165,3 +268,299 @@ done
 done
 ```
 
+## Correlation Cortical thickness (91 subjects)
+We extract cortical thickness values from each software with Destrieux Atlas (aparc a2009s) and correlated with ToM scores and other structures.
+
+```{r message=FALSE, warning=FALSE}
+library(dplyr)
+library(ggplot2)
+library(tibble)
+library(ggthemr)
+library(corrplot)
+library(tidyverse)
+library(plyr)
+library(rstatix)
+##colors 
+col <- colorRampPalette(c("#495c63", "#65767b", "#FFFFFF","#93c6d4","#3d6470"))
+```
+
+```{r message=FALSE, warning=FALSE}
+#### SST 91 ####
+# left
+rois_cat_91<-read.csv("data/ROIs_catROIs_aparc_a2009s_thickness_91.csv")
+left_cat_91<- select(as.tibble(rois_cat_91[3:ncol(rois_cat_91)]), starts_with('l'))
+cat.lg_91<-colMeans(left_cat_91)
+# right
+right_cat_91<- select(as.tibble(rois_cat_91[4:ncol(rois_cat_91)]), starts_with('r'))
+cat.rg_91<-colMeans(right_cat_91)
+
+# For correlation plot
+join.cat.rl_91<-data_frame(left_cat_91,right_cat_91)
+
+## FreeSurfer ##
+# left
+rois_fs_91<-read.csv("data/lh_ROIs_fsROIs_aparc_a2009s_thicknes.csv")
+left_fs_91<- select(as.tibble(rois_fs_91), starts_with('l'))
+fs.lg_91<-colMeans(left_fs_91[,-1])
+col.lr.fs<-str_replace(colnames(left_fs_91),"_thickness","")
+colnames(left_fs_91)<-col.lr.fs
+col.lr.fs<-str_replace(colnames(left_fs_91),"h_","")
+colnames(left_fs_91)<-col.lr.fs
+
+# right
+rois_fs_r_91<-read.csv("data/rh_ROIs_fsROIs_aparc_a2009s_thicknes.csv")
+right_fs_91<- select(as.tibble(rois_fs_r_91), starts_with('r'))
+fs.rg_91<-colMeans(right_fs_91[,-1])
+col.lr.fs<-str_replace(colnames(right_fs_91),"_thickness","")
+colnames(right_fs_91)<-col.lr.fs
+col.lr.fs<-str_replace(colnames(right_fs_91),"h_","")
+colnames(right_fs_91)<-col.lr.fs
+
+# For correlation plot
+join.fs.rl_91<-data_frame(left_fs_91,right_fs_91)
+
+# Selecting ROIs
+
+rois.join.cat.91<- join.cat.rl_91 %>% select("lG_front_inf.Triangul","rG_front_inf.Triangul","lG_front_middle","rG_front_middle","lG_orbital","rG_orbital","lG_pariet_inf.Angular","rG_pariet_inf.Angular","lG_precuneus","rG_precuneus","lG_temporal_middle","rG_temporal_middle")
+rois.cat.91<-rois.join.cat.91 %>% mutate(IFG_CAT12=rowMeans(rois.join.cat.91[c("lG_front_inf.Triangul","rG_front_inf.Triangul")]),MFG_CAT12=rowMeans(rois.join.cat.91[c("lG_front_middle","rG_front_middle")]),OFG_CAT12=rowMeans(rois.join.cat.91[c("lG_orbital","rG_orbital")]),IPL_CAT12=rowMeans(rois.join.cat.91[c("lG_pariet_inf.Angular","rG_pariet_inf.Angular")]),Pcu_CAT12=rowMeans(rois.join.cat.91[c("lG_precuneus","rG_precuneus")]),MTG_CAT12=rowMeans(rois.join.cat.91[c("lG_temporal_middle","rG_temporal_middle")]))
+
+rois.join.fs.91<- join.fs.rl_91 %>% select("lG_front_inf.Triangul","rG_front_inf.Triangul","lG_front_middle","rG_front_middle","lG_orbital","rG_orbital","lG_pariet_inf.Angular","rG_pariet_inf.Angular","lG_precuneus","rG_precuneus","lG_temporal_middle","rG_temporal_middle")
+rois.fs.91<-rois.join.fs.91 %>% mutate(IFG_FS=rowMeans(rois.join.fs.91[c("lG_front_inf.Triangul","rG_front_inf.Triangul")]),MFG_FS=rowMeans(rois.join.fs.91[c("lG_front_middle","rG_front_middle")]),OFG_FS=rowMeans(rois.join.fs.91[c("lG_orbital","rG_orbital")]),IPL_FS=rowMeans(rois.join.fs.91[c("lG_pariet_inf.Angular","rG_pariet_inf.Angular")]),Pcu_FS=rowMeans(rois.join.fs.91[c("lG_precuneus","rG_precuneus")]),MTG_FS=rowMeans(rois.join.fs.91[c("lG_temporal_middle","rG_temporal_middle")]))
+
+rois.cat.fs.91<-data_frame(rois.cat.91[-c(1:12)],rois.fs.91[-c(1:12)])
+row.names(rois.cat.fs.91)<-rois_fs_91$lh.aparc.a2009s.thickness
+```
+
+From the resulting joint matrix of each cortical thickness subject, we select those regions who has shown relation with theory of mind. For this study we selected: 
+
+- IFG
+- MFG
+- OFG
+- IPL
+- Pcu
+- MTG
+
+```{r message=FALSE, warning=FALSE}
+# columns means for both hemispheres 
+cat.rl_91<-data.frame(cat.lg_91,cat.rg_91)
+cat_91<-cat.rl_91 %>% mutate(mean=rowMeans(cbind(cat.lg_91,cat.rg_91), na.rm=T))
+row.names(cat_91)<-row.names(cat.rl_91)
+r.cat.sd<-sapply(right_cat_91[,-1],sd,na.rm=TRUE)
+l.cat.sd<-sapply(left_cat_91[,-1],sd,na.rm=TRUE)
+cat.sd<-data.frame(l.cat.sd,r.cat.sd)
+cat.sd<-cat.sd %>% mutate(meansd=rowMeans(cbind(l.cat.sd,r.cat.sd), na.rm=T))
+cat_91<-data.frame(cat.rl_91[,0],cat_91)
+
+fs.rl_91<-data.frame(fs.lg_91,fs.rg_91)
+fs_91<-fs.rl_91 %>% mutate(mean=rowMeans(cbind(fs.lg_91,fs.rg_91), na.rm=T))
+fs_91<-data.frame(fs.rl_91[,0],fs_91)
+row.names(fs_91)<-row.names(fs.rl_91)
+
+r.fs.sd<-sapply(right_fs_91[,-1],sd,na.rm=TRUE)
+l.fs.sd<-sapply(left_fs_91[,-1],sd,na.rm=TRUE)
+fs.sd<-data.frame(l.fs.sd,r.fs.sd)
+fs.sd<-fs.sd %>% mutate(meansd=rowMeans(cbind(l.fs.sd,r.fs.sd), na.rm=T))
+
+row.fs.91.lr<-str_replace(row.names(fs_91),"_thickness","")
+row.names(fs_91)<-row.fs.91.lr
+row.fs.91.lr<-str_replace(row.names(fs_91),"h_","")
+row.names(fs_91)<-row.fs.91.lr
+
+fs<-data.frame(fs_91,fs.sd)
+cat<-data.frame(na.omit(cat_91),cat.sd)
+
+fs.cat<-merge(cat[3],fs[3],by="row.names")
+fs.cat.sd<-merge(cat[6],fs[6],by="row.names")
+fs.cat.2.sd<-data.frame(fs.cat,fs.cat.sd[-1])
+colnames(fs.cat)[2]<-"CAT12-SBM"
+colnames(fs.cat)[3]<-"FreeSurfer"
+colnames(fs.cat.2.sd)[2:5]<-c("CAT12-SBM","FreeSurfer","CATsd","FSsd")
+
+ggthemr("fresh")
+
+CTT<-fs.cat %>% gather("Software","CT",2:3)
+
+levels(CTT$Software)[1]<-"CAT12-SBM"
+levels(CTT$Software)[2]<-"FreeSurfer"
+legend_ord <- factor(CTT$Software, levels = rev(levels(CTT$Software)))
+mu <- ddply(CTT, "Software", summarise, grp.mean=mean(CT))
+CT_his<-ggplot(CTT, aes(x=CT, fill=Software, color=Software)) +
+  geom_histogram(aes(y=..density..),position="identity", alpha=0.7)+geom_density(alpha=0.42)+
+  geom_vline(data=mu, aes(xintercept=grp.mean, color=Software),
+             linetype="dashed")+
+  theme(legend.position="top")+
+  labs(x="Cortical Thickness", y = "Density")
+CT_his+
+  scale_fill_discrete(breaks=legend_ord)+
+  scale_color_discrete(breaks=legend_ord)
+
+CTT %>% wilcox_test(CT~Software, alternative = "two.sided", mu = 0,
+            paired = FALSE)%>%
+  adjust_pvalue(method = "bonferroni")
+CTT %>% wilcox_effsize(CT~Software, alternative = "two.sided", mu = 0,
+                       paired = FALSE)
+CTT %>% cohens_d(CT~Software, var.equal = FALSE)
+
+
+## bar plot
+CTT.sd<-fs.cat.2.sd[c(1,4:5)] %>% gather("Software","sd",2:3)
+#CT<-data.frame(CTT,CTT.sd[3])
+
+## write and rename CT file
+CT<-read_csv("data/fscat.csv")
+levels(CT$Software)[1]<-"CAT12-SBM"
+levels(CT$Software)[2]<-"FreeSurfer"
+legend_ord <- factor(CT$Software, levels = rev(levels(CT$Software)))
+
+CT_bars<-ggplot(CT, aes(x=names, y=CT, fill=legend_ord,color=legend_ord))+
+  geom_bar(stat="identity", position=position_dodge())+ 
+  theme(axis.text.x = element_text(angle = 90, hjust = 1),
+        legend.position = "top")+
+  labs(x="Structures",y="Cortical Thickness (mm)")+
+  scale_color_manual(values=c("black", "black"),name="Software")+
+  scale_fill_manual(values=c("#233b43","#65adc2"),name="Software")
+CT_bars+
+  geom_errorbar(aes(ymin=CT-sd, ymax=CT+sd),
+                width=.15,                    # Width of the error bars
+                position=position_dodge(.9))
+```
+
+```{r message=FALSE, warning=FALSE}
+sst_val<-read_csv("data/SST.csv")
+rois.cat.fs.91<-data_frame(sst_val,rois.cat.fs.91)
+roi.m.ct_91<-cor(rois.cat.fs.91)
+p.mat<-cor.mtest(roi.m.ct_91)
+corrplot(roi.m.ct_91, method="color", col=col(200),  
+         type="upper", tl.col="black", tl.srt=45, 
+         p.mat = p.mat$p, sig.level = 0.001, insig = "blank", diag=FALSE,
+         addgrid.col = "gray")
+```
+
+## Correlation Cortical thickness (69 subjects)
+
+```{r message=FALSE, warning=FALSE}
+##ROIS SST-RMET - 69 ###
+
+## CAT12 ##
+# left
+rois_cat<-read.csv("data/ROIs_catROIs_aparc_a2009s_thickness.csv")
+left_cat<- select(as.tibble(rois_cat[3:ncol(rois_cat)]), starts_with('l'))
+cat.lg<-colMeans(left_cat)
+# right
+right_cat<- select(as.tibble(rois_cat[4:ncol(rois_cat)]), starts_with('r'))
+cat.rg<-colMeans(right_cat)
+
+# For correlation plot
+join.cat.rl<-data_frame(left_cat,right_cat)
+
+# Both hemispheres
+cat.rl<-data.frame(cat.lg,cat.rg)
+cat<-cat.rl %>% mutate(mean=rowMeans(cbind(cat.lg,cat.rg), na.rm=T))
+cat<-data.frame(cat.rl[,0],cat)
+
+r.cat.sd<-sapply(right_cat,sd,na.rm=TRUE)
+l.cat.sd<-sapply(left_cat,sd,na.rm=TRUE)
+cat.sd<-data.frame(l.cat.sd,r.cat.sd)
+cat.sd<-cat.sd %>% mutate(mean=rowMeans(cbind(l.cat.sd,r.cat.sd), na.rm=T))
+cat<-data.frame(cat,cat.sd)
+
+## FreeSurfer ##
+# left
+rois_fs<-read.csv("data/lh_ROIs_fsROIs_aparc_a2009s_thicknes_69.csv")
+left_fs<- select(as.tibble(rois_fs), starts_with('l'))
+fs.lg<-colMeans(left_fs[,-1])
+# right
+rois_fs_r<-read.csv("data/rh_ROIs_fsROIs_aparc_a2009s_thicknes_69.csv")
+right_fs<- select(as.tibble(rois_fs_r), starts_with('r'))
+fs.rg<-colMeans(right_fs[,-1])
+
+col.lr.fs<-str_replace(colnames(left_fs),"_thickness","")
+colnames(left_fs)<-col.lr.fs
+col.lr.fs<-str_replace(colnames(left_fs),"h_","")
+colnames(left_fs)<-col.lr.fs
+
+col.lr.fs<-str_replace(colnames(right_fs),"_thickness","")
+colnames(right_fs)<-col.lr.fs
+col.lr.fs<-str_replace(colnames(right_fs),"h_","")
+colnames(right_fs)<-col.lr.fs
+
+# both hemispheres
+fs.rl<-data.frame(fs.lg,fs.rg)
+fs<-fs.rl %>% mutate(mean=rowMeans(cbind(fs.lg,fs.rg), na.rm=T))
+fs<-data.frame(fs.rl[,0],fs)
+
+r.fs.sd<-sapply(right_fs[,-1],sd,na.rm=TRUE)
+l.fs.sd<-sapply(left_fs[,-1],sd,na.rm=TRUE)
+fs.sd<-data.frame(l.fs.sd,r.fs.sd)
+fs.sd<-fs.sd %>% mutate(mean=rowMeans(cbind(l.fs.sd,r.fs.sd), na.rm=T))
+fs<-data.frame(fs,fs.sd)
+
+# For correlation plot
+join.fs.rl<-data_frame(left_fs,right_fs)
+
+# Selecting ROIs
+rois.join.cat<- join.cat.rl %>% select("lG_front_inf.Triangul","rG_front_inf.Triangul","lG_front_middle","rG_front_middle","lG_orbital","rG_orbital","lG_pariet_inf.Angular","rG_pariet_inf.Angular","lG_precuneus","rG_precuneus","lG_temporal_middle","rG_temporal_middle")
+rois.cat<-rois.join.cat %>% mutate(IFG_CAT12=rowMeans(rois.join.cat[c("lG_front_inf.Triangul","rG_front_inf.Triangul")]),MFG_CAT12=rowMeans(rois.join.cat[c("lG_front_middle","rG_front_middle")]),OFG_CAT12=rowMeans(rois.join.cat[c("lG_orbital","rG_orbital")]),IPL_CAT12=rowMeans(rois.join.cat[c("lG_pariet_inf.Angular","rG_pariet_inf.Angular")]),Pcu_CAT12=rowMeans(rois.join.cat[c("lG_precuneus","rG_precuneus")]),MTG_CAT12=rowMeans(rois.join.cat[c("lG_temporal_middle","rG_temporal_middle")]))
+
+
+rois.join.fs<- join.fs.rl %>% select("lG_front_inf.Triangul","rG_front_inf.Triangul","lG_front_middle","rG_front_middle","lG_orbital","rG_orbital","lG_pariet_inf.Angular","rG_pariet_inf.Angular","lG_precuneus","rG_precuneus","lG_temporal_middle","rG_temporal_middle")
+rois.fs<-rois.join.fs %>% mutate(IFG_FS=rowMeans(rois.join.fs[c("lG_front_inf.Triangul","rG_front_inf.Triangul")]),MFG_FS=rowMeans(rois.join.fs[c("lG_front_middle","rG_front_middle")]),OFG_FS=rowMeans(rois.join.fs[c("lG_orbital","rG_orbital")]),IPL_FS=rowMeans(rois.join.fs[c("lG_pariet_inf.Angular","rG_pariet_inf.Angular")]),Pcu_FS=rowMeans(rois.join.fs[c("lG_precuneus","rG_precuneus")]),MTG_FS=rowMeans(rois.join.fs[c("lG_temporal_middle","rG_temporal_middle")]))
+
+rois.cat.fs<-data_frame(rois.cat[-c(1:12)],rois.fs[-c(1:12)])
+row.names(rois.cat.fs)<-rois_fs$lh.aparc.a2009s.thickness
+
+```
+
+```{r message=FALSE, warning=FALSE}
+sst_rmet_val<-read_csv("data/SST_RMET.csv")
+rois.cat.fs<-data_frame(sst_rmet_val,rois.cat.fs)
+roi.m.ct<-cor(rois.cat.fs)
+p.mat<-cor.mtest(roi.m.ct)
+corrplot(roi.m.ct, method="color", col=col(200),  
+         type="upper", tl.col="black", tl.srt=45, 
+         p.mat = p.mat$p, sig.level = 0.001, insig = "blank", diag=FALSE,
+         addgrid.col = "gray")
+```
+
+## Correlation Volume (91 subjects)
+
+1. Extract Volume from FSL using fslstats function
+
+2. Extract Volume from CAT12-VBM using marsbars toolbox: http://marsbar.sourceforge.net/
+
+Correlation plot:
+
+```{r message=FALSE, warning=FALSE}
+rois<-read.csv("data/rois_sst.csv")
+
+rois.names.vol<-c("SST","IPL/TPJ-L_CAT12","Pcu-L1_CAT12","dmPFC-L_CAT12","AnG-L_CAT12","LOC-R_CAT12","mFC-L_CAT12","MTG-R_CAT12",
+        "Pcu-L2_CAT12","TL-L_CAT12","IPL/TPJ-L_FSL","Pcu-L1_FSL","dmPFC-L_FSL","AnG-L_FSL","LOC-R_FSL",
+        "mFC-L_FSL","MTG-R_FSL","Pcu-L2_FSL","TL-L_FSL")
+roi.m<-cor(rois)
+colnames(roi.m)<-rois.names.vol
+rownames(roi.m)<-rois.names.vol
+p.mat<-cor.mtest(rois) 
+corrplot(roi.m, method="color", col=col(200),  
+         type="upper", tl.col="black", tl.srt=45, 
+         p.mat = p.mat$p, sig.level = 0.001, insig = "blank", diag=FALSE,
+         addgrid.col = "gray")
+
+```
+
+## Correlation volume (69 subjects)
+
+```{r message=FALSE, warning=FALSE}
+rois_69<-read.csv("data/rois_rmet.csv")
+rois.names.vol<-c("RMET","SST","IPL/TPJ-L_CAT12","Pcu-L1_CAT12","dmPFC-L_CAT12","AnG-L_CAT12","LOC-R_CAT12","mFC-L_CAT12","MTG-R_CAT12",
+        "Pcu-L2_CAT12","TL-L_CAT12","IPL/TPJ-L_FSL","Pcu-L1_FSL","dmPFC-L_FSL","AnG-L_FSL","LOC-R_FSL",
+        "mFC-L_FSL","MTG-R_FSL","Pcu-L2_FSL","TL-L_FSL")
+roi.m.69<-cor(rois_69)
+colnames(roi.m.69)<-rois.names.vol
+rownames(roi.m.69)<-rois.names.vol
+p.mat<-cor.mtest(rois_69) 
+corrplot(roi.m.69, method="color", col=col(200),  
+         type="upper", tl.col="black", tl.srt=45, 
+         p.mat = p.mat$p, sig.level = 0.001, insig = "blank", diag=FALSE,
+         addgrid.col = "gray")
+
+```
