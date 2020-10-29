@@ -8,7 +8,7 @@ editor_options:
   chunk_output_type: console
 ---
 
-Datasets and code for the preprint: [Theory of Mind and its elusive structural substrate](10.31219/osf.io/5pf2h).
+Datasets and code for the preprint: [Theory of Mind and its elusive structural substrate](https://osf.io/5pf2h).
 
 Please let us know if something in the code is incomplete or files are missing or you have any problems.
 
